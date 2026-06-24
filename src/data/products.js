@@ -40,7 +40,7 @@ export const products = [
     images: ["https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&auto=format&fit=crop"],
     description: "Elevated wide-leg trousers with a high-rise waist and fluid drape. Cut from premium crepe fabric that holds its shape beautifully throughout the day.",
     features: ["Premium crepe fabric","High-rise waist","Wide leg silhouette","Hidden zip closure","Machine washable"],
-    sizes: ["XS","S","M","L","XL"], colors: ["Ecru","Black","Chocolate"], rating: 4.7, reviews: 98, bestSeller: false },
+    sizes: ["XS","S","M","L","XL"], colors: ["Ecru","Black","Chocolate"], rating: 4.7, reviews: 9844, bestSeller: false },
   { id: 8, name: "Cashmere Knit Scarf", category: "Accessories", price: 2200, originalPrice: null, tag: null,
     image: "https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&auto=format&fit=crop",
     images: ["https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&auto=format&fit=crop"],
