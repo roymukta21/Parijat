@@ -1,14 +1,149 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { RiArrowRightLine } from 'react-icons/ri'
 import { products, categories } from '../data/products'
 import ProductCard from '../components/ProductCard/ProductCard'
 
+
 const marqueeItems = ['New Season Arrivals','Free Shipping Worldwide','Sustainably Crafted','Timeless Elegance','Exclusive Designs']
 
+const PAGE_SIZE = 8
+
+function FeaturedSection() {
+  const [tab, setTab] = useState('All')
+  const [categoryFilter, setCategoryFilter] = useState('All')
+  const [page, setPage] = useState(1)
+  const [showAll, setShowAll] = useState(false)
+
+  const allCategories = ['All', ...Array.from(new Set(products.map(p => p.category)))]
+  const tabs = ['All', 'New Arrivals', 'Best Sellers', 'Sale']
+
+  const filtered = products
+    .filter(p => {
+      if (tab === 'New Arrivals') return p.isNew
+      if (tab === 'Best Sellers') return p.isBestSeller
+      if (tab === 'Sale') return p.isSale
+      return true
+    })
+    .filter(p => categoryFilter === 'All' || p.category === categoryFilter)
+
+  const displayed = showAll ? filtered : filtered.slice(0, page * PAGE_SIZE)
+
+  function handleTabChange(t) { setTab(t); setPage(1); setShowAll(false) }
+  function handleCatChange(c) { setCategoryFilter(c); setPage(1); setShowAll(false) }
+
+  return (
+    <section className="py-10 px-6 max-w-7xl mx-auto">
+      {/* Header */}
+      <p className="text-[10px] tracking-[0.4em] uppercase text-muted mb-4">Handpicked</p>
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8">
+        <h2 className="font-cormorant text-5xl font-light text-dark">
+          Featured <em className="italic text-accent">Picks</em>
+          <span className="font-sans text-sm font-normal text-muted ml-3 not-italic">
+            {filtered.length} items
+          </span>
+        </h2>
+        {/* Status tabs */}
+        <div className="flex items-center gap-1 bg-beige p-1 flex-wrap">
+          {tabs.map(t => (
+            <button
+              key={t}
+              onClick={() => handleTabChange(t)}
+              className={`text-[10px] tracking-[0.2em] uppercase px-4 py-2 transition-colors duration-200
+                ${tab === t ? 'bg-dark text-cream' : 'text-muted hover:text-dark'}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Category filter pills */}
+      <div className="flex items-center gap-2 mb-10 overflow-x-auto pb-2" style={{scrollbarWidth:'none'}}>
+        {allCategories.map(c => (
+          <button
+            key={c}
+            onClick={() => handleCatChange(c)}
+            className={`shrink-0 text-[10px] tracking-[0.2em] uppercase px-4 py-2 border transition-all duration-200
+              ${categoryFilter === c
+                ? 'bg-dark text-cream border-dark'
+                : 'bg-transparent border-[#C0B0A0] text-muted hover:border-dark hover:text-dark'}`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+
+      {/* Grid */}
+      {filtered.length === 0 ? (
+        <div className="text-center py-20">
+          <p className="font-cormorant text-2xl text-muted">No products found.</p>
+        </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {displayed.map((p, i) => (
+              <motion.div
+                key={p.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: (i % 8) * 0.07 }}
+              >
+                <ProductCard product={p} />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Load more controls */}
+          {!showAll && filtered.length > displayed.length && (
+            <div className="flex flex-col items-center gap-4 mt-14">
+              <p className="text-[10px] tracking-[0.2em] uppercase text-muted">
+                Showing {displayed.length} of {filtered.length} pieces
+              </p>
+              {/* Progress bar */}
+              <div className="w-48 h-px bg-[#D4C9B8] overflow-hidden">
+                <div
+                  className="h-full bg-dark transition-all duration-500"
+                  style={{ width: `${(displayed.length / filtered.length) * 100}%` }}
+                />
+              </div>
+              <div className="flex items-center gap-3 mt-2">
+                <button
+                  onClick={() => setPage(p => p + 1)}
+                  className="inline-flex items-center gap-3 bg-dark text-cream px-8 py-4 text-[10px] tracking-[0.3em] uppercase hover:bg-accent transition-colors duration-300"
+                >
+                  Load More <RiArrowRightLine />
+                </button>
+                <button
+                  onClick={() => setShowAll(true)}
+                  className="inline-flex items-center gap-3 border border-dark text-dark px-8 py-4 text-[10px] tracking-[0.3em] uppercase hover:bg-dark hover:text-cream transition-colors duration-300"
+                >
+                  View All {filtered.length}
+                </button>
+              </div>
+            </div>
+          )}
+
+          {showAll && (
+            <div className="flex justify-center mt-14">
+              <button
+                onClick={() => { setShowAll(false); setPage(1) }}
+                className="border border-dark text-dark px-8 py-4 text-[10px] tracking-[0.3em] uppercase hover:bg-dark hover:text-cream transition-colors duration-300"
+              >
+                Show Less
+              </button>
+            </div>
+          )}
+        </>
+      )}
+    </section>
+  )
+}
+
 export default function Home() {
-  const featured = products.slice(0, 4)
-  const bestSellers = products.filter(p => p.bestSeller).slice(0, 4)
+  const bestSellers = products.filter(p => p.isBestSeller).slice(0, 4)
 
   return (
     <main className="pt-[73px]">
@@ -75,24 +210,15 @@ export default function Home() {
               <div className="absolute inset-0 bg-dark/20 group-hover:bg-dark/40 transition-colors duration-300" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="font-cormorant text-2xl italic text-cream font-light">{cat.name}</p>
-                <p className="text-[9px] tracking-[0.2em] uppercase text-cream/70 mt-1">{cat.count} pieces</p>
+                <p className="text-[9px] tracking-[0.2em] uppercase text-cream/70 mt-1">{cat.count}</p>
               </div>
             </motion.div>
           ))}
         </div>
       </section>
 
-      {/* FEATURED PRODUCTS */}
-      <section className="py-4 px-6 max-w-7xl mx-auto">
-        <p className="text-[10px] tracking-[0.4em] uppercase text-muted mb-4">Handpicked</p>
-        <div className="flex justify-between items-end mb-10">
-          <h2 className="font-cormorant text-5xl font-light text-dark">Featured <em className="italic text-accent">Picks</em></h2>
-          <span className="text-[10px] tracking-[0.2em] uppercase text-muted border-b border-muted pb-0.5 cursor-pointer">View All</span>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {featured.map(p => <ProductCard key={p.id} product={p} />)}
-        </div>
-      </section>
+      {/* FEATURED PRODUCTS — with filter + load more */}
+      <FeaturedSection />
 
       {/* EDITORIAL BANNER */}
       <section className="my-20 grid md:grid-cols-2 min-h-[440px]">

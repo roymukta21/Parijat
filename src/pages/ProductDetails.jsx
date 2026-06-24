@@ -47,9 +47,9 @@ export default function ProductDetails() {
           {/* Images */}
           <div>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="overflow-hidden mb-3">
-              <img src={product.images[selectedImage]} alt={product.name} className="w-full h-[580px] object-cover" />
+              <img src={product.images?.[selectedImage] ?? product.image} alt={product.name} className="w-full h-[580px] object-cover" />
             </motion.div>
-            {product.images.length > 1 && (
+            {product.images?.length > 1 && (
               <div className="flex gap-3">
                 {product.images.map((img, i) => (
                   <button key={i} onClick={() => setSelectedImage(i)}
@@ -82,7 +82,7 @@ export default function ProductDetails() {
             <div className="mb-6">
               <p className="text-[10px] tracking-[0.2em] uppercase text-muted mb-3">Color: <span className="text-dark">{selectedColor || 'Select'}</span></p>
               <div className="flex gap-2 flex-wrap">
-                {product.colors.map(c => (
+                {(product.colors ?? []).map(c => (
                   <button key={c} onClick={() => setSelectedColor(c)}
                     className={`px-4 py-2 text-[11px] tracking-wide border transition-all ${selectedColor === c ? 'border-dark bg-dark text-cream' : 'border-taupe text-muted hover:border-dark'}`}>
                     {c}
@@ -92,11 +92,11 @@ export default function ProductDetails() {
             </div>
 
             {/* Sizes */}
-            {product.sizes[0] !== 'One Size' && (
+            {product.sizes?.[0] !== 'One Size' && (
               <div className="mb-8">
                 <p className="text-[10px] tracking-[0.2em] uppercase text-muted mb-3">Size: <span className="text-dark">{selectedSize || 'Select'}</span></p>
                 <div className="flex gap-2 flex-wrap">
-                  {product.sizes.map(s => (
+                  {(product.sizes ?? []).map(s => (
                     <button key={s} onClick={() => setSelectedSize(s)}
                       className={`w-12 h-12 text-xs border transition-all ${selectedSize === s ? 'border-dark bg-dark text-cream' : 'border-taupe text-muted hover:border-dark'}`}>
                       {s}
@@ -132,7 +132,7 @@ export default function ProductDetails() {
             <div className="border-t border-taupe/40 pt-6">
               <p className="text-[10px] tracking-[0.2em] uppercase text-muted mb-4">Product Details</p>
               <ul className="flex flex-col gap-2">
-                {product.features.map(f => (
+                {(product.features ?? []).map(f => (
                   <li key={f} className="text-xs text-[#7a6e64] flex items-center gap-2">
                     <span className="text-accent text-[8px]">◆</span> {f}
                   </li>
