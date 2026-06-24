@@ -5,7 +5,7 @@ export const products = [
     description: "A beautifully draped linen midi dress crafted for effortless elegance. The relaxed silhouette moves gracefully with every step, perfect for daytime gatherings and evening affairs.",
     features: ["100% Pure Linen","Relaxed midi length","Side zip closure","Hand-finished hem","Dry clean recommended"],
     sizes: ["XS","S","M","L","XL"], colors: ["Sand","Ivory","Sage"], rating: 4.9, reviews: 124, bestSeller: true },
-  { id: 2, name: "Strappy Heel Mule", category: "Footwear", price: 3200, originalPrice: null, tag: null,
+  { id: 2, name: "Strappy Heel Mule", category: "Footwear", prices: 3200, originalPrice: null, tag: null,
     image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&auto=format&fit=crop",
     images: ["https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&auto=format&fit=crop","https://images.unsplash.com/photo-1518049362265-d5b2a6467637?w=600&auto=format&fit=crop"],
     description: "Minimalist strappy heels with a sculptural block heel. Crafted in soft Italian leather, these mules complement every silhouette with understated sophistication.",
