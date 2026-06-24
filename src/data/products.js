@@ -49,9 +49,10 @@ const fashionImages = {
   ],
   jewellery: [
     'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80',
-    'https://images.unsplash.com/photo-1589207212797-72c8e4e39a13?w=600&q=80',
+    'https://images.unsplash.com/photo-1615197419794-52a6f5da9df0',
     'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80',
     'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=600&q=80',
+    'https://images.unsplash.com/photo-1693212793204-bcea856c75fe?w=600&q=80',
   ],
   scarves: [
     'https://images.unsplash.com/photo-1520903920243-00d872a2d1c9?w=600&q=80',
@@ -176,7 +177,7 @@ export const products = [
   { id:91, name:'Gold Cuff Bracelet', category:'Jewellery', price:9200, originalPrice:12000, image:img('jewellery',2), gallery:g('jewellery'), description:'An architectural gold cuff. The bracelet that turns a simple outfit into a statement.', features:['Brass with gold plating','Open cuff','Adjustable','Tarnish-resistant','Gift box included'], badge:null },
   { id:92, name:'Silver Hoop Earrings', category:'Jewellery', price:5500, originalPrice:7000, image:img('jewellery',3), gallery:g('jewellery'), description:'Sterling silver hoops, polished to a high shine. A timeless jewellery essential.', features:['Sterling silver','Polished finish','3cm diameter','Hinged closure','Gift box included'], badge:'Sale', isSale:true },
   { id:93, name:'Layered Necklace Set', category:'Jewellery', price:12500, originalPrice:16000, image:img('jewellery',0), gallery:g('jewellery'), description:'Three delicate gold chains, each a different length. The layered look, considered.', features:['18k gold-plated','Set of 3 chains','35/42/50cm','Lobster clasps','Gift box included'], badge:'New Arrival', isNew:true },
-  { id:94, name:'Diamond Stud Earrings', category:'Jewellery', price:24500, originalPrice:30000, image:img('jewellery',1), gallery:g('jewellery'), description:'0.25ct diamond studs in 18k white gold. The only earrings you will ever truly need.', features:['0.25ct diamonds','18k white gold','Push-back closure','Certificate of authenticity','Luxury box'], badge:'Limited Edition', isNew:true },
+  { id:94, name:'Diamond Stud Earrings', category:'Jewellery', price:24500, originalPrice:30000, image:img('jewellery',5), gallery:g('jewellery'), description:'0.25ct diamond studs in 18k white gold. The only earrings you will ever truly need.', features:['0.25ct diamonds','18k white gold','Push-back closure','Certificate of authenticity','Luxury box'], badge:'Limited Edition', isNew:true },
   { id:95, name:'Ivory Cashmere Scarf', category:'Scarves', price:11500, originalPrice:14500, image:img('scarves',0), gallery:g('scarves'), description:'A large-format cashmere scarf in ivory. Wrap it, drape it — it improves every outfit.', features:['100% Cashmere','200 x 65cm','Fringed ends','Dry clean or hand wash','Gift box'], badge:'Best Seller', isBestSeller:true },
   { id:96, name:'Camel Plaid Wool Scarf', category:'Scarves', price:9800, originalPrice:12500, image:img('scarves',1), gallery:g('scarves'), description:'Classic plaid pattern in camel and brown wool. A winter essential done properly.', features:['Lambswool blend','180 x 60cm','Fringed ends','Dry clean only','Gift box'], badge:null },
   { id:97, name:'Navy Silk Printed Scarf', category:'Scarves', price:13500, originalPrice:17000, image:img('scarves',2), gallery:g('scarves'), description:'A silk twill scarf with an original Parijat print. Worn as a headscarf, necktie, or bag accessory.', features:['100% Silk twill','90 x 90cm','Rolled edges','Dry clean only','Gift box'], badge:'New Arrival', isNew:true },
