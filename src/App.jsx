@@ -24,8 +24,8 @@ export default function App() {
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
       </Routes>
-      <Route path="/wishlist" element={<WishlistPage />} />
       <Footer />
     </>
   )
